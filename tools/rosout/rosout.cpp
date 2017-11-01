@@ -147,11 +147,7 @@ public:
     // check Parameter Server for omit_topics_from_logs flag
     int omit_topics_from_logs;
     node_.param("/rosout/omit_topics_from_logs", omit_topics_from_logs, 0);
-    if (omit_topics_from_logs)
-    {
-      ss << "[Topics Omitted]";
-    }
-    else
+    if (!omit_topics_from_logs)
     {
       ss << "[topics: ";
       std::vector<std::string>::const_iterator it = msg->topics.begin();
