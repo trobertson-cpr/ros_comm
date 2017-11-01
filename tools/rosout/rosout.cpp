@@ -146,7 +146,8 @@ public:
 
     // check Parameter Server for omit_topics_from_logs flag
     int omit_topics_from_logs;
-    if (node_.getParam("/rosout/omit_topics_from_logs", omit_topics_from_logs))
+    node_.param("/rosout/omit_topics_from_logs", omit_topics_from_logs, 0);
+    if (omit_topics_from_logs)
     {
       ss << "[Topics Omitted]";
     }
