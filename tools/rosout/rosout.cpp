@@ -144,23 +144,30 @@ public:
     ss << msg->name << " ";
     ss << "[" << msg->file << ":" << msg->line << "(" << msg->function << ")] ";
 
-/****************
-    ss << "[topics: ";
-    std::vector<std::string>::const_iterator it = msg->topics.begin();
-    std::vector<std::string>::const_iterator end = msg->topics.end();
-    for ( ; it != end; ++it )
+    // check Parameter Server for omit_topics_from_logs flag
+    int omit_topics_from_logs;
+    if (node_.getParam("/rosout/omit_topics_from_logs", omit_topics_from_logs))
     {
-      const std::string& topic = *it;
-
-      if ( it != msg->topics.begin() )
-      {
-        ss << ", ";
-      }
-
-      ss << topic;
+      ss << "[Topics Omitted]";
     }
-    ss << "] ";
-*****************/
+    else
+    {
+      ss << "[topics: ";
+      std::vector<std::string>::const_iterator it = msg->topics.begin();
+      std::vector<std::string>::const_iterator end = msg->topics.end();
+      for ( ; it != end; ++it )
+      {
+        const std::string& topic = *it;
+
+        if ( it != msg->topics.begin() )
+        {
+          ss << ", ";
+        }
+
+        ss << topic;
+      }
+      ss << "] ";
+    }
 
     ss << msg->msg;
     ss << "\n";
