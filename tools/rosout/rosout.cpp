@@ -144,6 +144,7 @@ public:
     ss << msg->name << " ";
     ss << "[" << msg->file << ":" << msg->line << "(" << msg->function << ")] ";
 
+/****************
     ss << "[topics: ";
     std::vector<std::string>::const_iterator it = msg->topics.begin();
     std::vector<std::string>::const_iterator end = msg->topics.end();
@@ -159,6 +160,7 @@ public:
       ss << topic;
     }
     ss << "] ";
+*****************/
 
     ss << msg->msg;
     ss << "\n";
